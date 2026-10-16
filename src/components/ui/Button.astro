@@ -1,0 +1,80 @@
+---
+/**
+ * Link styled as a pill button. Renders an `<a>` because every action on the
+ * site is navigation (anchors, mailto, downloads, external profiles).
+ *
+ * Put an icon in the `icon` slot to show it after the label.
+ */
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends Omit<HTMLAttributes<'a'>, 'class'> {
+  href: string;
+  /** `primary` is the filled accent button; `secondary` is outlined. */
+  variant?: 'primary' | 'secondary';
+  class?: string;
+}
+
+const { href, variant = 'primary', class: className, ...attrs } = Astro.props;
+---
+
+<a href={href} class:list={['button', `button--${variant}`, className]} {...attrs}>
+  <span>
+    <slot />
+  </span>
+  {Astro.slots.has('icon') && <slot name="icon" />}
+</a>
+
+<style>
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 2.75rem;
+    padding: 0.625rem 1.25rem;
+    border: 1px solid transparent;
+    border-radius: var(--radius-pill);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    line-height: 1;
+    white-space: nowrap;
+    transition:
+      background-color 0.2s ease,
+      border-color 0.2s ease,
+      color 0.2s ease,
+      transform 0.2s var(--ease-out);
+  }
+
+  .button :global(svg) {
+    width: 1.05em;
+    height: 1.05em;
+    transition: transform 0.3s var(--ease-out);
+  }
+
+  .button:hover :global(svg) {
+    transform: translate(2px, 0);
+  }
+
+  .button:active {
+    transform: translateY(1px) scale(0.98);
+  }
+
+  .button--primary {
+    background: var(--color-accent);
+    color: var(--color-accent-contrast);
+  }
+
+  .button--primary:hover {
+    background: var(--color-accent-hover);
+  }
+
+  .button--secondary {
+    border-color: var(--color-border);
+    background: var(--color-surface);
+    color: var(--color-text);
+  }
+
+  .button--secondary:hover {
+    border-color: var(--color-text-muted);
+  }
+</style>

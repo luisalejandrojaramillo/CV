@@ -1,0 +1,245 @@
+/**
+ * Global design tokens, reset and shared primitives.
+ *
+ * Theming: tokens are defined for light mode on `:root` and overridden for
+ * dark mode, either from the OS preference or from an explicit
+ * `data-theme` attribute set by the theme toggle.
+ *
+ * Shape system: interactive controls (buttons, chips) are full pills;
+ * surfaces (panels, images) use `--radius-surface`. Nothing else is rounded.
+ *
+ * Z-index scale: `--z-header` is the only layered element on the page.
+ */
+
+:root {
+  color-scheme: light;
+
+  /* Neutrals (cool, slightly green-tinted grays) */
+  --color-bg: #f6f7f6;
+  --color-surface: #fcfdfc;
+  --color-surface-muted: #edf0ee;
+  --color-text: #121715;
+  --color-text-muted: #4b5550;
+  --color-border: #dce2df;
+
+  /* Single accent: emerald */
+  --color-accent: #0b7a5c;
+  --color-accent-hover: #086149;
+  --color-accent-contrast: #f6fbf9;
+  --color-accent-soft: #e0efe9;
+  --color-accent-text: #0a6a50;
+
+  /* Shadows are tinted with the neutral hue, never pure black */
+  --shadow-soft: 0 1px 2px rgb(18 23 21 / 0.04), 0 12px 32px -12px rgb(18 23 21 / 0.12);
+
+  /* Typography */
+  --font-sans-stack: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono-stack: var(--font-mono), ui-monospace, SFMono-Regular, monospace;
+
+  /* Layout */
+  --container-max: 1200px;
+  --gutter: clamp(1rem, 4vw, 2.5rem);
+  --section-space: clamp(4.5rem, 10vw, 8rem);
+  --header-height: 4rem;
+
+  /* Shape */
+  --radius-surface: 1rem;
+  --radius-pill: 999px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration: 0.6s;
+
+  --z-header: 10;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+    --color-bg: #0d1110;
+    --color-surface: #131917;
+    --color-surface-muted: #19211e;
+    --color-text: #e7ecea;
+    --color-text-muted: #9ba7a2;
+    --color-border: #24302b;
+    --color-accent: #4fcf9f;
+    --color-accent-hover: #74ddb5;
+    --color-accent-contrast: #062319;
+    --color-accent-soft: #11261e;
+    --color-accent-text: #5fd7a9;
+    --shadow-soft: 0 1px 2px rgb(0 0 0 / 0.3), 0 16px 40px -16px rgb(0 0 0 / 0.5);
+  }
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --color-bg: #0d1110;
+  --color-surface: #131917;
+  --color-surface-muted: #19211e;
+  --color-text: #e7ecea;
+  --color-text-muted: #9ba7a2;
+  --color-border: #24302b;
+  --color-accent: #4fcf9f;
+  --color-accent-hover: #74ddb5;
+  --color-accent-contrast: #062319;
+  --color-accent-soft: #11261e;
+  --color-accent-text: #5fd7a9;
+  --shadow-soft: 0 1px 2px rgb(0 0 0 / 0.3), 0 16px 40px -16px rgb(0 0 0 / 0.5);
+}
+
+/* ---------- Reset ---------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--header-height) + 1.5rem);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  min-height: 100dvh;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans-stack);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+:is(ul, ol)[role='list'] {
+  list-style: none;
+  padding: 0;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  font-weight: 600;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---------- Layout primitives ---------- */
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  padding-block: var(--section-space);
+}
+
+.section-title {
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  max-width: 20ch;
+}
+
+.section-lead {
+  margin-top: 1rem;
+  max-width: 60ch;
+  color: var(--color-text-muted);
+  font-size: 1.0625rem;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: calc(var(--z-header) + 1);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+  font-weight: 500;
+  transform: translateY(-200%);
+}
+
+.skip-link:focus-visible {
+  transform: none;
+}
+
+/* ---------- Scroll reveal ----------
+ * Elements marked with `data-reveal` fade up once they enter the viewport.
+ * Only applied when JavaScript runs (`.js` on <html>) and the user has not
+ * asked for reduced motion, so content is never hidden otherwise.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-reveal] {
+    opacity: 0;
+    transform: translateY(1.5rem);
+    transition:
+      opacity var(--duration) var(--ease-out),
+      transform var(--duration) var(--ease-out);
+    transition-delay: calc(var(--reveal-index, 0) * 80ms);
+  }
+
+  .js [data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}

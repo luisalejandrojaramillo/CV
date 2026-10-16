@@ -1,0 +1,64 @@
+---
+/**
+ * Site footer with copyright and secondary profile links.
+ */
+import { profile } from '../../data/profile';
+
+const year = new Date().getFullYear();
+
+const links = [
+  { ...profile.social.linkedin, external: true },
+  { ...profile.social.github, external: true },
+  { label: 'Resume', href: profile.resume.href, external: false },
+];
+---
+
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    <p>&copy; {year} {profile.fullName}</p>
+    <ul role="list" class="site-footer__links">
+      {
+        links.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : { download: '' })}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+  }
+
+  .site-footer__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: 2rem;
+  }
+
+  .site-footer__links {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .site-footer__links a {
+    transition: color 0.2s ease;
+  }
+
+  .site-footer__links a:hover {
+    color: var(--color-text);
+  }
+</style>

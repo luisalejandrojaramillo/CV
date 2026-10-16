@@ -1,0 +1,142 @@
+---
+/**
+ * Sticky site header with brand, in-page navigation, theme switch and the
+ * primary contact action. Links use `/#id` so they also work from other routes.
+ */
+import Button from '../ui/Button.astro';
+import ThemeToggle from './ThemeToggle.astro';
+import { navigation, siteConfig } from '../../config/site';
+---
+
+<div class="header-sentinel" data-header-sentinel aria-hidden="true"></div>
+<header class="site-header" data-site-header>
+  <div class="container site-header__inner">
+    <a class="brand" href="/" aria-label={`${siteConfig.name}, home`}>
+      <img class="brand__mark" src="/favicon.svg" alt="" width="32" height="32" />
+      <span class="brand__name">{siteConfig.name}</span>
+    </a>
+
+    <nav class="site-nav" aria-label="Primary">
+      <ul role="list" class="site-nav__list">
+        {
+          navigation.map((item) => (
+            <li>
+              <a class="site-nav__link" href={`/#${item.id}`} data-nav-link={item.id}>
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="site-header__actions">
+      <ThemeToggle />
+      <Button href="/#contact" class="site-header__cta">Get in touch</Button>
+    </div>
+  </div>
+</header>
+
+<script>
+  import { initHeader } from '../../scripts/header';
+
+  initHeader();
+</script>
+
+<style>
+  .header-sentinel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 1px;
+  }
+
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-header);
+    border-bottom: 1px solid transparent;
+    transition:
+      background-color 0.3s ease,
+      border-color 0.3s ease;
+  }
+
+  .site-header[data-scrolled] {
+    border-bottom-color: var(--color-border);
+    background: color-mix(in srgb, var(--color-bg) 82%, transparent);
+    backdrop-filter: blur(14px) saturate(160%);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+  }
+
+  @media (prefers-reduced-transparency: reduce) {
+    .site-header[data-scrolled] {
+      background: var(--color-bg);
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+  }
+
+  .site-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    height: var(--header-height);
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .brand__mark {
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 0.4rem;
+  }
+
+  .site-nav__list {
+    display: flex;
+    gap: 0.25rem;
+  }
+
+  .site-nav__link {
+    display: inline-block;
+    padding: 0.5rem 0.875rem;
+    border-radius: var(--radius-pill);
+    color: var(--color-text-muted);
+    font-size: 0.9375rem;
+    transition:
+      color 0.2s ease,
+      background-color 0.2s ease;
+  }
+
+  .site-nav__link:hover,
+  .site-nav__link[aria-current='true'] {
+    color: var(--color-text);
+    background: var(--color-surface-muted);
+  }
+
+  .site-header__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+  }
+
+  /* Tablet and below: the page is short enough to scroll, so drop the nav. */
+  @media (max-width: 899px) {
+    .site-nav {
+      display: none;
+    }
+  }
+
+  @media (max-width: 479px) {
+    .brand__name {
+      display: none;
+    }
+  }
+</style>

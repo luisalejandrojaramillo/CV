@@ -1,0 +1,149 @@
+---
+/**
+ * Work experience grouped by company. The company column stays sticky on
+ * desktop while its roles scroll, which makes the career progression at a
+ * single employer easy to follow. Roles without highlights render compactly.
+ */
+import { experience } from '../../data/profile';
+---
+
+<section id="experience" class="section" aria-labelledby="experience-title">
+  <div class="container">
+    <h2 id="experience-title" class="section-title" data-reveal>Experience</h2>
+
+    <div class="experience">
+      {
+        experience.map((company) => (
+          <article class="company" aria-labelledby={`company-${company.name.toLowerCase()}`}>
+            <header class="company__header">
+              <h3 id={`company-${company.name.toLowerCase()}`} class="company__name">
+                {company.name}
+              </h3>
+              <p class="company__summary">{company.summary}</p>
+              <p class="company__meta">
+                {company.period}
+                <br />
+                {company.location}
+              </p>
+            </header>
+
+            <ol role="list" class="roles">
+              {company.roles.map((role) => (
+                <li class:list={['role', { 'role--compact': role.highlights.length === 0 }]} data-reveal>
+                  <div class="role__heading">
+                    <h4 class="role__title">{role.title}</h4>
+                    <p class="role__period">{role.period}</p>
+                  </div>
+                  {role.highlights.length > 0 && (
+                    <ul class="role__highlights">
+                      {role.highlights.map((highlight) => (
+                        <li>{highlight}</li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              ))}
+            </ol>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .experience {
+    display: grid;
+    gap: clamp(3rem, 6vw, 4.5rem);
+    margin-top: clamp(2rem, 4vw, 3rem);
+  }
+
+  .company {
+    display: grid;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+    gap: clamp(1.5rem, 5vw, 4rem);
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .company__header {
+    position: sticky;
+    top: calc(var(--header-height) + 2rem);
+    align-self: start;
+  }
+
+  .company__name {
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+  }
+
+  .company__summary {
+    margin-top: 0.5rem;
+    color: var(--color-text-muted);
+  }
+
+  .company__meta {
+    margin-top: 1.25rem;
+    color: var(--color-text-muted);
+    font-family: var(--font-mono-stack);
+    font-size: 0.8125rem;
+    line-height: 1.7;
+  }
+
+  /* Vertical rule ties the roles at one company into a single progression. */
+  .roles {
+    display: grid;
+    gap: 2.25rem;
+    padding-left: clamp(1.25rem, 3vw, 2rem);
+    border-left: 1px solid var(--color-border);
+  }
+
+  .role__heading {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.25rem 1.5rem;
+  }
+
+  .role__title {
+    font-size: 1.25rem;
+    letter-spacing: -0.015em;
+  }
+
+  .role__period {
+    color: var(--color-text-muted);
+    font-family: var(--font-mono-stack);
+    font-size: 0.8125rem;
+    white-space: nowrap;
+  }
+
+  .role__highlights {
+    display: grid;
+    gap: 0.625rem;
+    margin-top: 1rem;
+    padding-left: 1.125rem;
+    list-style-type: disc;
+    color: var(--color-text-muted);
+    max-width: 68ch;
+  }
+
+  .role__highlights li::marker {
+    color: var(--color-accent);
+  }
+
+  .role--compact .role__title {
+    font-size: 1.0625rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+  }
+
+  @media (max-width: 899px) {
+    .company {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .company__header {
+      position: static;
+    }
+  }
+</style>

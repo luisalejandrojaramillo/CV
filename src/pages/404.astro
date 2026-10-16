@@ -1,0 +1,47 @@
+---
+/**
+ * Not-found page. Most static hosts (Netlify, Vercel, GitHub Pages) serve
+ * the generated `404.html` automatically.
+ */
+import ArrowRightIcon from '@phosphor-icons/core/regular/arrow-right.svg';
+import Button from '../components/ui/Button.astro';
+import { siteConfig } from '../config/site';
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title={`Page not found | ${siteConfig.name}`} noindex>
+  <section class="section not-found" aria-labelledby="not-found-title">
+    <div class="container">
+      <p class="not-found__code">404</p>
+      <h1 id="not-found-title" class="not-found__title">This page does not exist.</h1>
+      <p class="section-lead">The link may be outdated. Everything about my work is on the home page.</p>
+      <Button href="/" class="not-found__action">
+        Back to home
+        <ArrowRightIcon slot="icon" aria-hidden="true" />
+      </Button>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found {
+    min-height: calc(100dvh - var(--header-height) - 6rem);
+    display: flex;
+    align-items: center;
+  }
+
+  .not-found__code {
+    color: var(--color-accent-text);
+    font-family: var(--font-mono-stack);
+    font-size: 0.875rem;
+  }
+
+  .not-found__title {
+    margin-top: 1rem;
+    font-size: clamp(2.25rem, 5vw, 3.5rem);
+  }
+
+  .not-found :global(.not-found__action) {
+    margin-top: 2rem;
+  }
+</style>

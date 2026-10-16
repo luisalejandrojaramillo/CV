@@ -1,0 +1,136 @@
+---
+/**
+ * Hero: who, what and the two primary actions, next to a portrait.
+ * Asymmetric split on desktop, stacked (text first) on mobile.
+ */
+import { Image } from 'astro:assets';
+import ArrowRightIcon from '@phosphor-icons/core/regular/arrow-right.svg';
+import DownloadIcon from '@phosphor-icons/core/regular/download-simple.svg';
+import portrait from '../../assets/images/portrait.jpg';
+import { profile } from '../../data/profile';
+import Button from '../ui/Button.astro';
+---
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="container hero__grid">
+    <div class="hero__content">
+      <p class="hero__eyebrow hero__animate">{profile.role}</p>
+      <h1 id="hero-title" class="hero__title hero__animate" style="--i: 1">{profile.name}</h1>
+      <p class="hero__pitch hero__animate" style="--i: 2">{profile.pitch}</p>
+      <div class="hero__actions hero__animate" style="--i: 3">
+        <Button href="#contact">
+          Get in touch
+          <ArrowRightIcon slot="icon" aria-hidden="true" />
+        </Button>
+        <Button href={profile.resume.href} variant="secondary" download>
+          {profile.resume.label}
+          <DownloadIcon slot="icon" aria-hidden="true" />
+        </Button>
+      </div>
+    </div>
+
+    <div class="hero__media hero__animate" style="--i: 1">
+      <Image
+        src={portrait}
+        alt={`Portrait of ${profile.name}`}
+        widths={[400, 640, 960]}
+        sizes="(min-width: 900px) 40vw, 90vw"
+        loading="eager"
+        fetchpriority="high"
+        class="hero__image"
+      />
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding-block: clamp(2.5rem, 6vw, 5rem) clamp(3rem, 7vw, 5.5rem);
+  }
+
+  .hero__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+    align-items: center;
+    gap: clamp(2rem, 6vw, 5.5rem);
+  }
+
+  .hero__eyebrow {
+    color: var(--color-accent-text);
+    font-family: var(--font-mono-stack);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .hero__title {
+    margin-top: 1.25rem;
+    font-size: clamp(2.75rem, 6.4vw, 5rem);
+    line-height: 1;
+    letter-spacing: -0.045em;
+  }
+
+  .hero__pitch {
+    margin-top: 1.5rem;
+    max-width: 34rem;
+    color: var(--color-text-muted);
+    font-size: clamp(1.0625rem, 1.6vw, 1.25rem);
+    line-height: 1.55;
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2.25rem;
+  }
+
+  .hero__media {
+    justify-self: end;
+    width: 100%;
+    max-width: 26rem;
+  }
+
+  .hero__image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: 50% 30%;
+    border-radius: var(--radius-surface);
+    background: var(--color-surface-muted);
+    box-shadow: var(--shadow-soft);
+  }
+
+  /* Staggered entrance that tells the story in reading order. */
+  @media (prefers-reduced-motion: no-preference) {
+    .hero__animate {
+      animation: hero-enter 0.9s var(--ease-out) both;
+      animation-delay: calc(var(--i, 0) * 90ms + 60ms);
+    }
+
+    @keyframes hero-enter {
+      from {
+        opacity: 0;
+        transform: translateY(1.25rem);
+      }
+    }
+  }
+
+  @media (max-width: 899px) {
+    .hero__grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .hero__media {
+      justify-self: start;
+      max-width: 22rem;
+    }
+
+    .hero__image {
+      aspect-ratio: 1;
+      object-position: 50% 20%;
+    }
+  }
+</style>

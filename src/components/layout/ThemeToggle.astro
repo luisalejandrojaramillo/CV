@@ -1,0 +1,72 @@
+---
+/**
+ * Light / dark theme switch. The initial theme is applied in `BaseHead`
+ * before paint; this button only flips it and remembers the choice.
+ */
+import MoonIcon from '@phosphor-icons/core/regular/moon.svg';
+import SunIcon from '@phosphor-icons/core/regular/sun.svg';
+---
+
+<button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme">
+  <SunIcon class="theme-toggle__icon theme-toggle__icon--sun" aria-hidden="true" />
+  <MoonIcon class="theme-toggle__icon theme-toggle__icon--moon" aria-hidden="true" />
+</button>
+
+<script>
+  import { initThemeToggle } from '../../scripts/theme';
+
+  initThemeToggle();
+</script>
+
+<style>
+  .theme-toggle {
+    display: grid;
+    place-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-pill);
+    background: var(--color-surface);
+    color: var(--color-text);
+    transition:
+      border-color 0.2s ease,
+      transform 0.2s var(--ease-out);
+  }
+
+  .theme-toggle:hover {
+    border-color: var(--color-text-muted);
+  }
+
+  .theme-toggle:active {
+    transform: scale(0.94);
+  }
+
+  .theme-toggle__icon {
+    grid-area: 1 / 1;
+    width: 1.125rem;
+    height: 1.125rem;
+  }
+
+  /* Show the icon of the theme you would switch TO. */
+  .theme-toggle__icon--sun {
+    display: none;
+  }
+
+  :global(:root[data-theme='dark']) .theme-toggle__icon--sun {
+    display: block;
+  }
+
+  :global(:root[data-theme='dark']) .theme-toggle__icon--moon {
+    display: none;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :global(:root:not([data-theme='light'])) .theme-toggle__icon--sun {
+      display: block;
+    }
+
+    :global(:root:not([data-theme='light'])) .theme-toggle__icon--moon {
+      display: none;
+    }
+  }
+</style>
