@@ -18,7 +18,7 @@ export const es: Content = {
   meta: {
     title: 'Luis Alejandro Jaramillo | Líder de Ingeniería, Pagos y Fintech',
     description:
-      'Líder de ingeniería con 5+ años en fintech y una Maestría en IA. Lidero el equipo de pagos transfronterizos en PuntoRed: personas, arquitectura y entrega.',
+      'Líder de ingeniería con 5+ años en fintech y una Maestría en IA. Lidero el equipo de pagos internacionales (cross-border) en PuntoRed: personas, arquitectura y entrega.',
   },
   nav: {
     expertise: 'Fortalezas',
@@ -67,9 +67,9 @@ export const es: Content = {
   },
   profile: {
     role: 'Líder de Ingeniería',
-    domain: 'Plataformas de Pagos y Fintech',
+    domain: 'Plataformas de pagos y fintech',
     pitch:
-      'Lidero el equipo de pagos transfronterizos en PuntoRed, con 5+ años en fintech y una Maestría en Inteligencia Artificial.',
+      'Lidero el equipo de pagos internacionales (cross-border) en PuntoRed, con 5+ años en fintech y una Maestría en Inteligencia Artificial.',
     languages: ['Español (nativo)', 'Inglés (fluido)'],
   },
   highlights: [
@@ -79,7 +79,7 @@ export const es: Content = {
     },
     {
       value: 'End-to-end',
-      description: 'responsabilidad sobre un dominio de pagos: arquitectura, roadmap, entrega y soporte en producción',
+      description: 'responsabilidad de punta a punta sobre un dominio de pagos: arquitectura, roadmap, entrega y soporte en producción',
     },
     {
       value: 'AI-first',
@@ -93,7 +93,7 @@ export const es: Content = {
   focusAreas: [
     {
       title: 'Liderazgo de ingeniería',
-      status: 'Hoy lidero el equipo de pagos transfronterizos en PuntoRed.',
+      status: 'Hoy lidero el equipo de pagos internacionales (cross-border) en PuntoRed.',
       description:
         'Contratación, onboarding, feedback y crecimiento profesional del equipo, con estándares claros de code review, deuda técnica y soporte en producción.',
       tags: ['Contratación y coaching', 'Desempeño', 'Entrega del roadmap', 'Stakeholders'],
@@ -101,7 +101,7 @@ export const es: Content = {
     {
       title: 'Arquitectura de plataformas de pago',
       description:
-        'Orquestación, pricing, enrutamiento e integraciones con proveedores, diseñados para escalar y superar auditorías PCI DSS y regulatorias.',
+        'Orquestación, pricing, enrutamiento e integraciones con proveedores, diseñados para escalar y cumplir con auditorías PCI DSS y requisitos regulatorios.',
       tags: ['Event-driven', 'Microservicios', 'Kafka', 'PCI DSS'],
     },
     {
@@ -116,15 +116,15 @@ export const es: Content = {
       name: 'PuntoRed',
       location: 'Bogotá, Colombia',
       period: 'Nov 2025 - Actualidad',
-      summary: 'Plataforma de pagos transfronterizos',
+      summary: 'Plataforma de pagos internacionales (cross-border)',
       roles: [
         {
           title: 'Software Tech Leader',
           period: 'Nov 2025 - Actualidad',
           highlights: [
-            'Lidero el equipo de ingeniería de pagos transfronterizos: contratación, onboarding, feedback, desempeño y desarrollo de carrera.',
-            'Respondo por la entrega completa del roadmap del dominio, junto a Producto y negocio en alcance, estimaciones y riesgos.',
-            'Defino la arquitectura de la plataforma transfronteriza (orquestación, pricing, enrutamiento e integraciones con proveedores) y reviso diseños y código para mantener la calidad.',
+            'Lidero el equipo de ingeniería de pagos internacionales (cross-border): contratación, onboarding, feedback, desempeño y desarrollo de carrera.',
+            'Soy responsable de la entrega del roadmap del dominio de punta a punta, y acuerdo con Producto y negocio el alcance, las estimaciones y los riesgos.',
+            'Defino la arquitectura de la plataforma de pagos internacionales (orquestación, pricing, enrutamiento e integraciones con proveedores) y reviso diseños y código para mantener la calidad.',
             'Establecí estándares de ingeniería del dominio para revisión de PRs, gestión de deuda técnica y soporte en producción.',
             'Impulso el desarrollo AI-first con estándares de equipo para programar, probar y revisar código con Claude Code y herramientas LLM.',
           ],
@@ -143,15 +143,15 @@ export const es: Content = {
           highlights: [
             'Lideré un equipo de desarrollo para unificar el pricing en toda la plataforma.',
             'Diseñé el primer servicio event-driven de la compañía para el procesamiento postransaccional.',
-            'Fui mentor de ingenieros junior y semi senior con code reviews y guía técnica.',
+            'Acompañé el crecimiento de ingenieros junior y semi senior con code reviews y orientación técnica.',
           ],
         },
         {
           title: 'Senior Software Engineer',
           period: 'Jun 2022 - Jul 2024',
           highlights: [
-            'Entregué enrutamiento, control de reintentos e integraciones de medios de pago locales que subieron la tasa de aprobación en 20% y evitaron cerca de USD 20.000 mensuales en penalidades.',
-            'Participé en auditorías PCI DSS y en requisitos regulatorios de cada país para operaciones de pago con licencia.',
+            'Implementé mejoras de enrutamiento, control de reintentos e integraciones de medios de pago locales que aumentaron en 20% la tasa de aprobación y evitaron cerca de USD 20.000 mensuales en penalidades.',
+            'Participé en auditorías PCI DSS y en requisitos regulatorios de cada país para operaciones de pago reguladas.',
           ],
         },
         {
