@@ -3,16 +3,18 @@
  * Education and certifications side by side: degrees on the left with their
  * periods, certificates on the right as a compact list.
  */
-import { certifications, education } from '../../data/profile';
+import { getContent } from '../../i18n';
+
+const { certifications, education, sections } = getContent(Astro.currentLocale);
 ---
 
 <section id="education" class="section" aria-labelledby="education-title">
   <div class="container">
-    <h2 id="education-title" class="section-title" data-reveal>Education and certifications</h2>
+    <h2 id="education-title" class="section-title" data-reveal>{sections.education}</h2>
 
     <div class="credentials">
       <div data-reveal>
-        <h3 class="credentials__heading">Education</h3>
+        <h3 class="credentials__heading">{sections.educationHeading}</h3>
         <ul role="list" class="credentials__list">
           {
             education.map((item) => (
@@ -27,7 +29,7 @@ import { certifications, education } from '../../data/profile';
       </div>
 
       <div data-reveal style="--reveal-index: 1">
-        <h3 class="credentials__heading">Certifications</h3>
+        <h3 class="credentials__heading">{sections.certifications}</h3>
         <ul role="list" class="credentials__list">
           {
             certifications.map((item) => (

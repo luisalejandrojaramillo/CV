@@ -26,10 +26,14 @@ function setTheme(theme: Theme): void {
   }
 }
 
-/** Keeps the button's accessible label in sync with the action it performs. */
+/**
+ * Keeps the button's accessible label in sync with the action it performs.
+ * The translated labels come from `data-label-light` and `data-label-dark`.
+ */
 function updateLabel(button: HTMLButtonElement): void {
   const next = getActiveTheme() === 'dark' ? 'light' : 'dark';
-  button.setAttribute('aria-label', `Switch to ${next} theme`);
+  const label = next === 'dark' ? button.dataset.labelDark : button.dataset.labelLight;
+  if (label) button.setAttribute('aria-label', label);
 }
 
 export function initThemeToggle(): void {

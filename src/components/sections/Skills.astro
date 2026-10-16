@@ -3,13 +3,15 @@
  * Skills grouped by discipline, laid out as a responsive grid of groups so
  * a long keyword list stays scannable. Languages are listed separately.
  */
-import { profile, skillGroups } from '../../data/profile';
+import { getContent } from '../../i18n';
 import Tag from '../ui/Tag.astro';
+
+const { profile, sections, skillGroups } = getContent(Astro.currentLocale);
 ---
 
 <section id="skills" class="section skills" aria-labelledby="skills-title">
   <div class="container">
-    <h2 id="skills-title" class="section-title" data-reveal>Skills and tools</h2>
+    <h2 id="skills-title" class="section-title" data-reveal>{sections.skills}</h2>
 
     <div class="skills__grid">
       {
@@ -27,7 +29,7 @@ import Tag from '../ui/Tag.astro';
         ))
       }
       <div class="skill-group" data-reveal style="--reveal-index: 2">
-        <h3 class="skill-group__name">Languages</h3>
+        <h3 class="skill-group__name">{sections.languages}</h3>
         <ul role="list" class="skill-group__items">
           {
             profile.languages.map((language) => (

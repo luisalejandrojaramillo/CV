@@ -4,12 +4,14 @@
  * desktop while its roles scroll, which makes the career progression at a
  * single employer easy to follow. Roles without highlights render compactly.
  */
-import { experience } from '../../data/profile';
+import { getContent } from '../../i18n';
+
+const { experience, sections } = getContent(Astro.currentLocale);
 ---
 
 <section id="experience" class="section" aria-labelledby="experience-title">
   <div class="container">
-    <h2 id="experience-title" class="section-title" data-reveal>Experience</h2>
+    <h2 id="experience-title" class="section-title" data-reveal>{sections.experience}</h2>
 
     <div class="experience">
       {

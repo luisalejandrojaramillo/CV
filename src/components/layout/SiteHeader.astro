@@ -1,28 +1,41 @@
 ---
 /**
- * Sticky site header with brand, in-page navigation, theme switch and the
- * primary contact action. Links use `/#id` so they also work from other routes.
+ * Sticky site header with brand, in-page navigation, language switch, theme
+ * switch and the primary contact action. Links point to the home page of the
+ * current locale (`/#id`, `/es/#id`) so they also work from other routes.
  */
 import Button from '../ui/Button.astro';
+import LanguageSwitch from './LanguageSwitch.astro';
 import ThemeToggle from './ThemeToggle.astro';
 import { navigation, siteConfig } from '../../config/site';
+import { getContent, localizePath, resolveLocale } from '../../i18n';
+
+interface Props {
+  /** Locale-independent path of the current page, for the language switch. */
+  path: string;
+}
+
+const { path } = Astro.props;
+const locale = resolveLocale(Astro.currentLocale);
+const { nav, ui } = getContent(locale);
+const home = localizePath(locale);
 ---
 
 <div class="header-sentinel" data-header-sentinel aria-hidden="true"></div>
 <header class="site-header" data-site-header>
   <div class="container site-header__inner">
-    <a class="brand" href="/" aria-label={`${siteConfig.name}, home`}>
+    <a class="brand" href={home} aria-label={`${siteConfig.name}, ${ui.home}`}>
       <img class="brand__mark" src="/favicon.svg" alt="" width="32" height="32" />
       <span class="brand__name">{siteConfig.name}</span>
     </a>
 
-    <nav class="site-nav" aria-label="Primary">
+    <nav class="site-nav" aria-label={ui.primaryNav}>
       <ul role="list" class="site-nav__list">
         {
-          navigation.map((item) => (
+          navigation.map((id) => (
             <li>
-              <a class="site-nav__link" href={`/#${item.id}`} data-nav-link={item.id}>
-                {item.label}
+              <a class="site-nav__link" href={`${home}#${id}`} data-nav-link={id}>
+                {nav[id]}
               </a>
             </li>
           ))
@@ -31,8 +44,9 @@ import { navigation, siteConfig } from '../../config/site';
     </nav>
 
     <div class="site-header__actions">
+      <LanguageSwitch path={path} />
       <ThemeToggle />
-      <Button href="/#contact" class="site-header__cta">Get in touch</Button>
+      <Button href={`${home}#contact`} class="site-header__cta">{ui.getInTouch}</Button>
     </div>
   </div>
 </header>

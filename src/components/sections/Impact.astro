@@ -3,12 +3,14 @@
  * Impact strip: real, résumé-backed numbers recruiters can quote.
  * Four columns on desktop, a 2x2 grid on small screens.
  */
-import { metrics } from '../../data/profile';
+import { getContent } from '../../i18n';
+
+const { metrics, sections } = getContent(Astro.currentLocale);
 ---
 
 <section class="impact" aria-labelledby="impact-title">
   <div class="container">
-    <h2 id="impact-title" class="visually-hidden">Impact</h2>
+    <h2 id="impact-title" class="visually-hidden">{sections.impact}</h2>
     <dl class="impact__grid">
       {
         metrics.map((metric, index) => (

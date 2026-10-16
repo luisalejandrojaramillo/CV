@@ -3,12 +3,16 @@
  *
  * The button briefly shows "Copied" (or an error) and the result is also
  * announced through the `[data-copy-status]` live region for screen readers.
+ * Translated messages come from `data-copied-text` and `data-error-text` on
+ * the button, so this script stays language-agnostic.
  */
 const RESET_DELAY_MS = 2000;
 
 export function initCopyEmail(): void {
   document.querySelectorAll<HTMLButtonElement>('[data-copy-email]').forEach((button) => {
     const email = button.dataset.copyEmail ?? '';
+    const copiedText = button.dataset.copiedText ?? 'Email copied';
+    const errorText = button.dataset.errorText ?? 'Copy failed, use the email link';
     const label = button.querySelector<HTMLElement>('[data-copy-label]');
     const status = button.parentElement?.querySelector<HTMLElement>('[data-copy-status]');
     let resetTimer: number | undefined;
@@ -29,9 +33,9 @@ export function initCopyEmail(): void {
     button.addEventListener('click', async () => {
       try {
         await navigator.clipboard.writeText(email);
-        show('copied', 'Email copied');
+        show('copied', copiedText);
       } catch {
-        show('error', 'Copy failed, use the email link');
+        show('error', errorText);
       }
     });
   });

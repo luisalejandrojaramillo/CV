@@ -8,22 +8,25 @@ import ArrowRightIcon from '@phosphor-icons/core/regular/arrow-right.svg';
 import DownloadIcon from '@phosphor-icons/core/regular/download-simple.svg';
 import portrait from '../../assets/images/portrait.jpg';
 import { profile } from '../../data/profile';
+import { getContent } from '../../i18n';
 import Button from '../ui/Button.astro';
+
+const content = getContent(Astro.currentLocale);
 ---
 
 <section class="hero" aria-labelledby="hero-title">
   <div class="container hero__grid">
     <div class="hero__content">
-      <p class="hero__eyebrow hero__animate">{profile.role}</p>
+      <p class="hero__eyebrow hero__animate">{content.profile.role}</p>
       <h1 id="hero-title" class="hero__title hero__animate" style="--i: 1">{profile.name}</h1>
-      <p class="hero__pitch hero__animate" style="--i: 2">{profile.pitch}</p>
+      <p class="hero__pitch hero__animate" style="--i: 2">{content.profile.pitch}</p>
       <div class="hero__actions hero__animate" style="--i: 3">
         <Button href="#contact">
-          Get in touch
+          {content.ui.getInTouch}
           <ArrowRightIcon slot="icon" aria-hidden="true" />
         </Button>
-        <Button href={profile.resume.href} variant="secondary" download>
-          {profile.resume.label}
+        <Button href={profile.resumeHref} variant="secondary" download>
+          {content.ui.resume.download}
           <DownloadIcon slot="icon" aria-hidden="true" />
         </Button>
       </div>
@@ -32,7 +35,7 @@ import Button from '../ui/Button.astro';
     <div class="hero__media hero__animate" style="--i: 1">
       <Image
         src={portrait}
-        alt={`Portrait of ${profile.name}`}
+        alt={content.ui.portraitAlt}
         widths={[400, 640, 960]}
         sizes="(min-width: 900px) 40vw, 90vw"
         loading="eager"

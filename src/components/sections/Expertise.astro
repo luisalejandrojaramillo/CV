@@ -4,15 +4,17 @@
  * asymmetric bento (one tall lead tile, two stacked tiles). Each tile has
  * its own surface treatment so the grid has rhythm, not repetition.
  */
-import { focusAreas } from '../../data/profile';
+import { getContent } from '../../i18n';
 import Tag from '../ui/Tag.astro';
+
+const { focusAreas, sections } = getContent(Astro.currentLocale);
 
 const variants = ['lead', 'outline', 'pattern'] as const;
 ---
 
 <section id="expertise" class="section" aria-labelledby="expertise-title">
   <div class="container">
-    <h2 id="expertise-title" class="section-title" data-reveal>What I bring to a team</h2>
+    <h2 id="expertise-title" class="section-title" data-reveal>{sections.expertise}</h2>
 
     <ul role="list" class="bento">
       {

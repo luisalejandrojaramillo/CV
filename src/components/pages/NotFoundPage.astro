@@ -1,0 +1,52 @@
+---
+/**
+ * Not-found page body, shared by every locale (`src/pages/404.astro`,
+ * `src/pages/es/404.astro`). Language switches and hreflang links point to
+ * each locale's home page, since a missing page has no translation.
+ */
+import ArrowRightIcon from '@phosphor-icons/core/regular/arrow-right.svg';
+import { siteConfig } from '../../config/site';
+import { getContent, localizePath, resolveLocale } from '../../i18n';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Button from '../ui/Button.astro';
+
+const locale = resolveLocale(Astro.currentLocale);
+const { notFound } = getContent(locale);
+---
+
+<BaseLayout title={`${notFound.title} | ${siteConfig.name}`} path="/" noindex>
+  <section class="section not-found" aria-labelledby="not-found-title">
+    <div class="container">
+      <p class="not-found__code">404</p>
+      <h1 id="not-found-title" class="not-found__title">{notFound.heading}</h1>
+      <p class="section-lead">{notFound.lead}</p>
+      <Button href={localizePath(locale)} class="not-found__action">
+        {notFound.action}
+        <ArrowRightIcon slot="icon" aria-hidden="true" />
+      </Button>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found {
+    min-height: calc(100dvh - var(--header-height) - 6rem);
+    display: flex;
+    align-items: center;
+  }
+
+  .not-found__code {
+    color: var(--color-accent-text);
+    font-family: var(--font-mono-stack);
+    font-size: 0.875rem;
+  }
+
+  .not-found__title {
+    margin-top: 1rem;
+    font-size: clamp(2.25rem, 5vw, 3.5rem);
+  }
+
+  .not-found :global(.not-found__action) {
+    margin-top: 2rem;
+  }
+</style>

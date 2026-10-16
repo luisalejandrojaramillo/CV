@@ -4,11 +4,16 @@
  *
  * The inline theme script runs before first paint so a visitor who chose a
  * theme never sees a flash of the other one.
+ *
+ * Indexable pages list every translation with `hreflang` alternates (plus an
+ * `x-default` that points to the default locale) so search engines show
+ * each visitor the right language.
  */
 import { Font, getImage } from 'astro:assets';
 import portrait from '../../assets/images/portrait.jpg';
 import { siteConfig } from '../../config/site';
-import { experience, profile } from '../../data/profile';
+import { profile } from '../../data/profile';
+import { defaultLocale, getContent, locales, localizeUrl, resolveLocale } from '../../i18n';
 
 interface Props {
   /** Page title. Defaults to the site title. */
@@ -17,11 +22,22 @@ interface Props {
   description?: string;
   /** Set to true for pages that should not be indexed (e.g. 404). */
   noindex?: boolean;
+  /** Locale-independent path of this page, used for the hreflang alternates. */
+  path: string;
 }
 
-const { title = siteConfig.title, description = siteConfig.description, noindex = false } = Astro.props;
+const locale = resolveLocale(Astro.currentLocale);
+const content = getContent(locale);
+const { title = content.meta.title, description = content.meta.description, noindex = false, path } = Astro.props;
 
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+
+/** The same page in every locale, for `hreflang` links. */
+const alternates = locales.map((code) => ({
+  hreflang: getContent(code).language.tag,
+  href: localizeUrl(code, path),
+}));
+const otherOgLocales = locales.filter((code) => code !== locale).map((code) => getContent(code).language.ogLocale);
 
 // Square social preview cropped from the portrait (works for Open Graph and X).
 const socialImage = await getImage({
@@ -34,15 +50,15 @@ const socialImage = await getImage({
 });
 const socialImageUrl = new URL(socialImage.src, Astro.site);
 
-const currentCompany = experience[0];
+const currentCompany = content.experience[0];
 
 /** schema.org Person profile so search engines can build a knowledge panel. */
 const personSchema = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: profile.fullName,
-  jobTitle: profile.role,
-  url: Astro.site?.toString(),
+  jobTitle: content.profile.role,
+  url: localizeUrl(locale),
   image: socialImageUrl.toString(),
   email: `mailto:${profile.email}`,
   worksFor: { '@type': 'Organization', name: currentCompany.name },
@@ -63,6 +79,16 @@ const personSchema = {
 <meta name="author" content={profile.fullName} />
 <link rel="canonical" href={canonicalUrl} />
 {noindex && <meta name="robots" content="noindex" />}
+{
+  !noindex && (
+    <>
+      {alternates.map((alternate) => (
+        <link rel="alternate" hreflang={alternate.hreflang} href={alternate.href} />
+      ))}
+      <link rel="alternate" hreflang="x-default" href={localizeUrl(defaultLocale, path)} />
+    </>
+  )
+}
 
 <!-- Theme -->
 <meta name="color-scheme" content="light dark" />
@@ -97,14 +123,15 @@ const personSchema = {
 <!-- Open Graph / social cards -->
 <meta property="og:type" content="profile" />
 <meta property="og:site_name" content={siteConfig.name} />
-<meta property="og:locale" content={siteConfig.ogLocale} />
+<meta property="og:locale" content={content.language.ogLocale} />
+{otherOgLocales.map((ogLocale) => <meta property="og:locale:alternate" content={ogLocale} />)}
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonicalUrl} />
 <meta property="og:image" content={socialImageUrl} />
 <meta property="og:image:width" content="600" />
 <meta property="og:image:height" content="600" />
-<meta property="og:image:alt" content={`Portrait of ${profile.name}`} />
+<meta property="og:image:alt" content={content.ui.portraitAlt} />
 <meta property="profile:first_name" content="Luis Alejandro" />
 <meta property="profile:last_name" content="Jaramillo Rincon" />
 <meta name="twitter:card" content="summary" />

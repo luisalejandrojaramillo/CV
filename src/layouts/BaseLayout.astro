@@ -2,30 +2,40 @@
 /**
  * Base page shell shared by every route: head metadata, global styles,
  * skip link, header and footer. Page content goes in the default slot.
+ *
+ * The locale comes from the URL (`Astro.currentLocale`), so pages do not
+ * pass it in.
  */
 import BaseHead from '../components/seo/BaseHead.astro';
 import SiteFooter from '../components/layout/SiteFooter.astro';
 import SiteHeader from '../components/layout/SiteHeader.astro';
-import { siteConfig } from '../config/site';
+import { getContent, stripLocale } from '../i18n';
 import '../styles/global.css';
 
 interface Props {
   title?: string;
   description?: string;
   noindex?: boolean;
+  /**
+   * Locale-independent path of this page, used by the language switch and
+   * the hreflang links. Defaults to the current URL without its locale
+   * prefix. Pages without a translation (e.g. 404) pass "/".
+   */
+  path?: string;
 }
 
-const { title, description, noindex } = Astro.props;
+const { title, description, noindex, path = stripLocale(Astro.url.pathname) } = Astro.props;
+const { language, ui } = getContent(Astro.currentLocale);
 ---
 
 <!doctype html>
-<html lang={siteConfig.locale}>
+<html lang={language.tag}>
   <head>
-    <BaseHead title={title} description={description} noindex={noindex} />
+    <BaseHead title={title} description={description} noindex={noindex} path={path} />
   </head>
   <body>
-    <a class="skip-link" href="#main">Skip to content</a>
-    <SiteHeader />
+    <a class="skip-link" href="#main">{ui.skipLink}</a>
+    <SiteHeader path={path} />
     <main id="main">
       <slot />
     </main>

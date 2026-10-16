@@ -9,24 +9,30 @@ import EnvelopeIcon from '@phosphor-icons/core/regular/envelope-simple.svg';
 import GithubIcon from '@phosphor-icons/core/regular/github-logo.svg';
 import LinkedinIcon from '@phosphor-icons/core/regular/linkedin-logo.svg';
 import { profile } from '../../data/profile';
+import { getContent } from '../../i18n';
 import Button from '../ui/Button.astro';
+
+const { contact } = getContent(Astro.currentLocale).sections;
 ---
 
 <section id="contact" class="section contact" aria-labelledby="contact-title">
   <div class="container">
     <div class="contact__panel" data-reveal>
-      <h2 id="contact-title" class="contact__title">Building a payments team? Let’s talk.</h2>
-      <p class="contact__lead">
-        I’m open to Engineering Manager and Tech Lead conversations. Based in {profile.location}, working
-        in Spanish and English.
-      </p>
+      <h2 id="contact-title" class="contact__title">{contact.title}</h2>
+      <p class="contact__lead">{contact.lead}</p>
 
       <div class="contact__actions">
         <Button href={`mailto:${profile.email}`}>
-          Send an email
+          {contact.sendEmail}
           <EnvelopeIcon slot="icon" aria-hidden="true" />
         </Button>
-        <button class="contact__copy" type="button" data-copy-email={profile.email}>
+        <button
+          class="contact__copy"
+          type="button"
+          data-copy-email={profile.email}
+          data-copied-text={contact.copied}
+          data-error-text={contact.copyFailed}
+        >
           <CopyIcon aria-hidden="true" />
           <span data-copy-label>{profile.email}</span>
         </button>

@@ -3,13 +3,16 @@
  * Site footer with copyright and secondary profile links.
  */
 import { profile } from '../../data/profile';
+import { getContent } from '../../i18n';
+
+const { ui } = getContent(Astro.currentLocale);
 
 const year = new Date().getFullYear();
 
 const links = [
   { ...profile.social.linkedin, external: true },
   { ...profile.social.github, external: true },
-  { label: 'Resume', href: profile.resume.href, external: false },
+  { label: ui.resume.short, href: profile.resumeHref, external: false },
 ];
 ---
 

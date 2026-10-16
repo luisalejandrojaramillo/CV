@@ -1,0 +1,71 @@
+---
+/**
+ * Links to the current page in every other locale. Each link is labelled in
+ * its target language (with matching `lang` and `hreflang`) so visitors who
+ * do not read the current language can still find their own. The visible
+ * code ("ES") starts the accessible name, so voice control users can say it.
+ */
+import TranslateIcon from '@phosphor-icons/core/regular/translate.svg';
+import { getContent, locales, localizePath, resolveLocale } from '../../i18n';
+
+interface Props {
+  /** Locale-independent path of the current page. */
+  path: string;
+}
+
+const { path } = Astro.props;
+const current = resolveLocale(Astro.currentLocale);
+
+const targets = locales
+  .filter((code) => code !== current)
+  .map((code) => ({ code, href: localizePath(code, path), language: getContent(code).language }));
+---
+
+{
+  targets.map((target) => (
+    <a
+      class="lang-switch"
+      href={target.href}
+      hreflang={target.language.tag}
+      lang={target.language.tag}
+      title={target.language.name}
+    >
+      <TranslateIcon class="lang-switch__icon" aria-hidden="true" />
+      {target.code.toUpperCase()}
+      <span class="visually-hidden">, {target.language.switchLabel}</span>
+    </a>
+  ))
+}
+
+<style>
+  .lang-switch {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    height: 2.5rem;
+    padding-inline: 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-pill);
+    background: var(--color-surface);
+    color: var(--color-text);
+    font-family: var(--font-mono-stack);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    transition:
+      border-color 0.2s ease,
+      transform 0.2s var(--ease-out);
+  }
+
+  .lang-switch:hover {
+    border-color: var(--color-text-muted);
+  }
+
+  .lang-switch:active {
+    transform: scale(0.96);
+  }
+
+  .lang-switch__icon {
+    width: 1rem;
+    height: 1rem;
+  }
+</style>

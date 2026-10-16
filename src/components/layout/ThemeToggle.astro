@@ -2,12 +2,25 @@
 /**
  * Light / dark theme switch. The initial theme is applied in `BaseHead`
  * before paint; this button only flips it and remembers the choice.
+ *
+ * Translated labels travel in data attributes so `theme.ts` stays
+ * language-agnostic.
  */
 import MoonIcon from '@phosphor-icons/core/regular/moon.svg';
 import SunIcon from '@phosphor-icons/core/regular/sun.svg';
+import { getContent } from '../../i18n';
+
+const { theme } = getContent(Astro.currentLocale).ui;
 ---
 
-<button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme">
+<button
+  class="theme-toggle"
+  type="button"
+  data-theme-toggle
+  data-label-light={theme.toLight}
+  data-label-dark={theme.toDark}
+  aria-label={theme.toggle}
+>
   <SunIcon class="theme-toggle__icon theme-toggle__icon--sun" aria-hidden="true" />
   <MoonIcon class="theme-toggle__icon theme-toggle__icon--moon" aria-hidden="true" />
 </button>
