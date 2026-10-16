@@ -12,8 +12,11 @@ export interface Link {
   href: string;
 }
 
-/** A headline metric backed by a real, verifiable achievement. */
-export interface Metric {
+/**
+ * A short "at a glance" fact about what the person offers today.
+ * `value` is the large headline, `description` completes the sentence.
+ */
+export interface Highlight {
   value: string;
   description: string;
 }
@@ -55,17 +58,21 @@ export interface SkillGroup {
 export interface Credential {
   title: string;
   issuer: string;
-  /** Optional period or location detail. */
-  detail?: string;
+  /** Optional period, e.g. "2025 - 2026". */
+  period?: string;
+  /** Optional location of the institution. */
+  location?: string;
+  /** Optional one-line note on why it matters, shown for featured items. */
+  description?: string;
 }
 
 export const profile = {
   name: 'Luis Alejandro Jaramillo',
   fullName: 'Luis Alejandro Jaramillo Rincon',
-  role: 'Engineering Manager & Tech Lead',
+  role: 'Software Tech Lead',
   domain: 'Payments & Fintech',
   pitch:
-    'I lead engineering teams that build critical payment infrastructure: cross-border payments, pricing, routing and fraud prevention.',
+    'I lead the cross-border payments team at PuntoRed, pairing 5+ years in fintech with a Master’s in Artificial Intelligence.',
   location: 'Bogotá, Colombia',
   email: 'luisalejandrojaramillo@hotmail.com',
   resume: {
@@ -85,22 +92,22 @@ export const profile = {
   languages: ['Spanish (native)', 'English (fluent)'],
 } as const;
 
-export const metrics: Metric[] = [
+export const highlights: Highlight[] = [
   {
-    value: '+20%',
-    description: 'transaction approval rate from routing, retry control and local payment methods',
+    value: '5+ years',
+    description: 'in fintech, building and running payment infrastructure in production',
   },
   {
-    value: '~$20K',
-    description: 'USD in monthly penalties avoided through the same payment flow improvements',
+    value: 'End-to-end',
+    description: 'ownership of a payments domain: architecture, roadmap, delivery and production support',
   },
   {
-    value: '5+ yrs',
-    description: 'building and running payment infrastructure in production',
+    value: 'AI-first',
+    description: 'team standards for AI-assisted coding, testing and code review with Claude Code',
   },
   {
-    value: '3',
-    description: 'promotions at PayU, from Junior to Specialist Software Engineer',
+    value: 'MSc in AI',
+    description: 'Master’s degree in Artificial Intelligence from Universidad Internacional de Valencia',
   },
 ];
 
@@ -206,16 +213,21 @@ export const skillGroups: SkillGroup[] = [
   },
 ];
 
+/** Degrees, newest first. The first entry is featured in the Education section. */
 export const education: Credential[] = [
   {
     title: 'Master’s Degree in Artificial Intelligence',
     issuer: 'Universidad Internacional de Valencia (VIU)',
-    detail: '2025 - 2026, remote',
+    period: '2025 - 2026',
+    location: 'Valencia, Spain',
+    description:
+      'The foundation behind the AI-first practices I bring to my team: AI-assisted coding, testing and code review.',
   },
   {
     title: 'Software Engineering',
     issuer: 'Escuela Colombiana de Ingeniería Julio Garavito',
-    detail: '2015 - 2020',
+    period: '2015 - 2020',
+    location: 'Bogotá, Colombia',
   },
 ];
 

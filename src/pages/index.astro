@@ -1,25 +1,26 @@
 ---
 /**
  * Home page. Section order follows how recruiters read a profile:
- * who and what (hero), proof (impact), fit (expertise), track record
- * (experience), depth (skills, education) and the next step (contact).
+ * who and what (hero), key facts (highlights), fit (expertise), track
+ * record (experience), credentials (education), depth (skills) and the
+ * next step (contact).
  */
 import Contact from '../components/sections/Contact.astro';
 import Education from '../components/sections/Education.astro';
 import Experience from '../components/sections/Experience.astro';
 import Expertise from '../components/sections/Expertise.astro';
 import Hero from '../components/sections/Hero.astro';
-import Impact from '../components/sections/Impact.astro';
+import Highlights from '../components/sections/Highlights.astro';
 import Skills from '../components/sections/Skills.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout>
   <Hero />
-  <Impact />
+  <Highlights />
   <Expertise />
   <Experience />
-  <Skills />
   <Education />
+  <Skills />
   <Contact />
 </BaseLayout>

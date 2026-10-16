@@ -1,20 +1,20 @@
 ---
 /**
- * Impact strip: real, résumé-backed numbers recruiters can quote.
+ * "At a glance" strip: four short facts about what the person offers today.
  * Four columns on desktop, a 2x2 grid on small screens.
  */
-import { metrics } from '../../data/profile';
+import { highlights } from '../../data/profile';
 ---
 
-<section class="impact" aria-labelledby="impact-title">
+<section class="highlights" aria-labelledby="highlights-title">
   <div class="container">
-    <h2 id="impact-title" class="visually-hidden">Impact</h2>
-    <dl class="impact__grid">
+    <h2 id="highlights-title" class="visually-hidden">At a glance</h2>
+    <dl class="highlights__grid">
       {
-        metrics.map((metric, index) => (
-          <div class="impact__item" data-reveal style={`--reveal-index: ${index}`}>
-            <dt class="impact__value">{metric.value}</dt>
-            <dd class="impact__description">{metric.description}</dd>
+        highlights.map((highlight, index) => (
+          <div class="highlights__item" data-reveal style={`--reveal-index: ${index}`}>
+            <dt class="highlights__value">{highlight.value}</dt>
+            <dd class="highlights__description">{highlight.description}</dd>
           </div>
         ))
       }
@@ -23,36 +23,37 @@ import { metrics } from '../../data/profile';
 </section>
 
 <style>
-  .impact__grid {
+  .highlights__grid {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     border-block: 1px solid var(--color-border);
   }
 
-  .impact__item {
+  .highlights__item {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
     padding: 2rem 1.5rem 2.25rem;
   }
 
-  .impact__item + .impact__item {
+  .highlights__item + .highlights__item {
     border-left: 1px solid var(--color-border);
   }
 
-  .impact__item:first-child {
+  .highlights__item:first-child {
     padding-left: 0;
   }
 
-  .impact__value {
-    font-size: clamp(2rem, 3.6vw, 2.75rem);
+  .highlights__value {
+    font-size: clamp(1.625rem, 2.6vw, 2.25rem);
+    white-space: nowrap;
     font-weight: 600;
     line-height: 1;
     letter-spacing: -0.04em;
     font-variant-numeric: tabular-nums;
   }
 
-  .impact__description {
+  .highlights__description {
     color: var(--color-text-muted);
     font-size: 0.9375rem;
     line-height: 1.5;
@@ -60,20 +61,20 @@ import { metrics } from '../../data/profile';
   }
 
   @media (max-width: 899px) {
-    .impact__grid {
+    .highlights__grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .impact__item {
+    .highlights__item {
       padding: 1.75rem 1.25rem;
     }
 
-    .impact__item:nth-child(odd) {
+    .highlights__item:nth-child(odd) {
       padding-left: 0;
       border-left: 0;
     }
 
-    .impact__item:nth-child(n + 3) {
+    .highlights__item:nth-child(n + 3) {
       border-top: 1px solid var(--color-border);
     }
   }

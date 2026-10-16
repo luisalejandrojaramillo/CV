@@ -6,10 +6,10 @@ export const siteConfig = {
   /** Short name shown in the browser tab and as the installed app name. */
   name: 'Luis Alejandro Jaramillo',
   /** Default `<title>` for the home page. */
-  title: 'Luis Alejandro Jaramillo | Engineering Manager & Tech Lead',
+  title: 'Luis Alejandro Jaramillo | Tech Lead, Payments & Fintech',
   /** Meta description, kept under ~160 characters for search snippets. */
   description:
-    'Engineering Manager and Tech Lead with 5+ years in fintech, leading teams that build cross-border payments, pricing, routing and fraud prevention.',
+    'Software Tech Lead with 5+ years in fintech and a Master’s in AI, leading the cross-border payments team at PuntoRed: people, architecture and delivery.',
   /** BCP 47 language tag for the `<html lang>` attribute. */
   locale: 'en',
   /** Open Graph locale. */
@@ -25,6 +25,6 @@ export const siteConfig = {
 export const navigation = [
   { id: 'expertise', label: 'Expertise' },
   { id: 'experience', label: 'Experience' },
-  { id: 'skills', label: 'Skills' },
   { id: 'education', label: 'Education' },
+  { id: 'skills', label: 'Skills' },
 ] as const;
