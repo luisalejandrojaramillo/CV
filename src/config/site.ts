@@ -17,7 +17,7 @@ export const siteConfig = {
  * In-page anchors shown in the header, in display order. Each id must match
  * a section id; each locale file provides the label under `nav`.
  */
-export const navigation = ['expertise', 'experience', 'skills', 'education'] as const;
+export const navigation = ['expertise', 'experience', 'education', 'skills'] as const;
 
 /** A section id that appears in the header navigation. */
 export type NavId = (typeof navigation)[number];

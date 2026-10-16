@@ -1,8 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <title>LJ</title>
-  <rect width="64" height="64" rx="14" fill="#0b7a5c"/>
-  <g fill="none" stroke="#f6fbf9" stroke-width="6" stroke-linecap="square" stroke-linejoin="miter">
-    <path d="M14 15v33h11"/>
-    <path d="M37 15h12v22a11 11 0 0 1-11 11h-3"/>
-  </g>
-</svg>
+  <defs>
+  <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#1a2420"/>
+  <stop offset="1" stop-color="#0b100e"/>
+  </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="15" fill="url(#g2)"/>
+  <rect x=".75" y=".75" width="62.5" height="62.5" rx="14.25" fill="none" stroke="#3fd49c" stroke-opacity=".35" stroke-width="1.5"/>
+  <path d="M30.40 47.96L7.77 47.96L7.77 15.30L15.77 15.30L15.77 41.43L30.40 41.43" fill="#f2f6f4"/>
+  <path d="M43.86 48.70Q39.77 48.70 37.01 47.04Q34.25 45.39 32.82 42.51Q31.39 39.64 31.35 36L39.35 35.63Q39.44 39.04 40.62 40.60Q41.79 42.17 43.86 42.17Q45.88 42.17 47.06 40.72Q48.23 39.27 48.23 36.09L48.23 15.30L56.23 15.30L56.23 36.09Q56.23 39.96 54.67 42.79Q53.11 45.62 50.32 47.16Q47.54 48.70 43.86 48.70" fill="#3fd49c"/>
+  </svg>

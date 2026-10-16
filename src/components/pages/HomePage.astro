@@ -5,25 +5,25 @@
  * the current URL, so this file holds no text.
  *
  * Section order follows how recruiters read a profile: who and what (hero),
- * proof (impact), fit (expertise), track record (experience), depth (skills,
- * education) and the next step (contact).
+ * key facts (highlights), fit (expertise), track record (experience),
+ * credentials (education), depth (skills) and the next step (contact).
  */
 import Contact from '../sections/Contact.astro';
 import Education from '../sections/Education.astro';
 import Experience from '../sections/Experience.astro';
 import Expertise from '../sections/Expertise.astro';
 import Hero from '../sections/Hero.astro';
-import Impact from '../sections/Impact.astro';
+import Highlights from '../sections/Highlights.astro';
 import Skills from '../sections/Skills.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout>
   <Hero />
-  <Impact />
+  <Highlights />
   <Expertise />
   <Experience />
-  <Skills />
   <Education />
+  <Skills />
   <Contact />
 </BaseLayout>

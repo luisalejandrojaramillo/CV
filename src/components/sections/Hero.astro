@@ -17,7 +17,7 @@ const content = getContent(Astro.currentLocale);
 <section class="hero" aria-labelledby="hero-title">
   <div class="container hero__grid">
     <div class="hero__content">
-      <p class="hero__eyebrow hero__animate">{content.profile.role}</p>
+      <p class="hero__eyebrow hero__animate">{content.profile.role} · {content.profile.domain}</p>
       <h1 id="hero-title" class="hero__title hero__animate" style="--i: 1">{profile.name}</h1>
       <p class="hero__pitch hero__animate" style="--i: 2">{content.profile.pitch}</p>
       <div class="hero__actions hero__animate" style="--i: 3">

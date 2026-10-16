@@ -19,8 +19,11 @@ export interface Link {
   href: string;
 }
 
-/** A headline metric backed by a real, verifiable achievement. */
-export interface Metric {
+/**
+ * A short "at a glance" fact about what the person offers today.
+ * `value` is the large headline, `description` completes the sentence.
+ */
+export interface Highlight {
   value: string;
   description: string;
 }
@@ -62,8 +65,12 @@ export interface SkillGroup {
 export interface Credential {
   title: string;
   issuer: string;
-  /** Optional period or location detail. */
-  detail?: string;
+  /** Optional period, e.g. "2025 - 2026". */
+  period?: string;
+  /** Optional location of the institution. */
+  location?: string;
+  /** Optional one-line note on why it matters, shown for featured items. */
+  description?: string;
 }
 
 /** Everything a visitor reads, for one locale. */
@@ -110,13 +117,15 @@ export interface Content {
   };
   /** Section headings and section-specific copy. */
   sections: {
-    impact: string;
+    /** Visually hidden heading of the highlights strip. */
+    highlights: string;
     expertise: string;
     experience: string;
     skills: string;
     languages: string;
     education: string;
-    educationHeading: string;
+    /** Heading of the degrees listed beside the featured one. */
+    degree: string;
     certifications: string;
     contact: {
       title: string;
@@ -136,13 +145,16 @@ export interface Content {
   /** Translated profile fields. Language-neutral facts live in `profile`. */
   profile: {
     role: string;
+    /** Shown after the role in the hero, e.g. "Payments & Fintech". */
+    domain: string;
     pitch: string;
     languages: string[];
   };
-  metrics: Metric[];
+  highlights: Highlight[];
   focusAreas: FocusArea[];
   experience: Company[];
   skillGroups: SkillGroup[];
+  /** Degrees, newest first. The first entry is featured in the Education section. */
   education: Credential[];
   certifications: Credential[];
 }

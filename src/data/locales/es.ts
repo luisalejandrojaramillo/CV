@@ -16,15 +16,15 @@ export const es: Content = {
     switchLabel: 'Ver este sitio en español',
   },
   meta: {
-    title: 'Luis Alejandro Jaramillo | Engineering Manager y Tech Lead',
+    title: 'Luis Alejandro Jaramillo | Tech Lead, Pagos y Fintech',
     description:
-      'Engineering Manager y Tech Lead con 5+ años en fintech. Lidero equipos de pagos transfronterizos, pricing, enrutamiento y prevención de fraude.',
+      'Software Tech Lead con 5+ años en fintech y una Maestría en IA. Lidero el equipo de pagos transfronterizos en PuntoRed: personas, arquitectura y entrega.',
   },
   nav: {
     expertise: 'Fortalezas',
     experience: 'Experiencia',
-    skills: 'Habilidades',
     education: 'Formación',
+    skills: 'Habilidades',
   },
   ui: {
     skipLink: 'Saltar al contenido',
@@ -43,17 +43,17 @@ export const es: Content = {
     },
   },
   sections: {
-    impact: 'Impacto',
+    highlights: 'En resumen',
     expertise: 'Lo que aporto a un equipo',
     experience: 'Experiencia',
     skills: 'Habilidades y herramientas',
     languages: 'Idiomas',
     education: 'Formación y certificaciones',
-    educationHeading: 'Formación',
+    degree: 'Pregrado',
     certifications: 'Certificaciones',
     contact: {
       title: '¿Armando un equipo de pagos? Hablemos.',
-      lead: 'Estoy abierto a conversar sobre roles de Engineering Manager y Tech Lead. Vivo en Bogotá, Colombia, y trabajo en español e inglés.',
+      lead: 'Estoy abierto a conversar sobre roles de Tech Lead y liderazgo de ingeniería. Vivo en Bogotá, Colombia, y trabajo en español e inglés.',
       sendEmail: 'Enviar un correo',
       copied: 'Correo copiado',
       copyFailed: 'No se pudo copiar el correo',
@@ -66,27 +66,28 @@ export const es: Content = {
     action: 'Volver al inicio',
   },
   profile: {
-    role: 'Engineering Manager & Tech Lead',
+    role: 'Software Tech Lead',
+    domain: 'Pagos y Fintech',
     pitch:
-      'Lidero equipos de ingeniería que construyen infraestructura de pagos crítica: pagos transfronterizos, pricing, enrutamiento y prevención de fraude.',
+      'Lidero el equipo de pagos transfronterizos en PuntoRed, con 5+ años en fintech y una Maestría en Inteligencia Artificial.',
     languages: ['Español (nativo)', 'Inglés (fluido)'],
   },
-  metrics: [
-    {
-      value: '+20%',
-      description: 'en tasa de aprobación de transacciones con enrutamiento, control de reintentos y medios de pago locales',
-    },
-    {
-      value: '~$20K',
-      description: 'USD mensuales en penalidades evitadas con esas mismas mejoras al flujo de pagos',
-    },
+  highlights: [
     {
       value: '5+ años',
-      description: 'construyendo y operando infraestructura de pagos en producción',
+      description: 'en fintech, construyendo y operando infraestructura de pagos en producción',
     },
     {
-      value: '3',
-      description: 'ascensos en PayU, de Junior a Specialist Software Engineer',
+      value: 'End-to-end',
+      description: 'responsabilidad sobre un dominio de pagos: arquitectura, roadmap, entrega y soporte en producción',
+    },
+    {
+      value: 'AI-first',
+      description: 'estándares de equipo para programar, probar y revisar código con IA usando Claude Code',
+    },
+    {
+      value: 'MSc en IA',
+      description: 'Maestría en Inteligencia Artificial de la Universidad Internacional de Valencia',
     },
   ],
   focusAreas: [
@@ -192,12 +193,16 @@ export const es: Content = {
     {
       title: 'Maestría en Inteligencia Artificial',
       issuer: 'Universidad Internacional de Valencia (VIU)',
-      detail: '2025 - 2026, virtual',
+      period: '2025 - 2026',
+      location: 'Valencia, España',
+      description:
+        'La base de las prácticas AI-first que llevo a mi equipo: programación, pruebas y code review asistidos por IA.',
     },
     {
       title: 'Ingeniería de Software',
       issuer: 'Escuela Colombiana de Ingeniería Julio Garavito',
-      detail: '2015 - 2020',
+      period: '2015 - 2020',
+      location: 'Bogotá, Colombia',
     },
   ],
   certifications: [

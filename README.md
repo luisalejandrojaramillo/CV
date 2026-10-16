@@ -1,6 +1,6 @@
 # Luis Alejandro Jaramillo · Portfolio
 
-Personal portfolio of Luis Alejandro Jaramillo, Engineering Manager and Tech Lead in payments and fintech.
+Personal portfolio of Luis Alejandro Jaramillo, Software Tech Lead in payments and fintech.
 Built with [Astro](https://astro.build) as a fully static, single-page site with no client framework.
 Available in English (`/`) and Spanish (`/es/`).
 

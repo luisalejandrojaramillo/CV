@@ -12,15 +12,15 @@ export const en: Content = {
     switchLabel: 'View this site in English',
   },
   meta: {
-    title: 'Luis Alejandro Jaramillo | Engineering Manager & Tech Lead',
+    title: 'Luis Alejandro Jaramillo | Tech Lead, Payments & Fintech',
     description:
-      'Engineering Manager and Tech Lead with 5+ years in fintech, leading teams that build cross-border payments, pricing, routing and fraud prevention.',
+      'Software Tech Lead with 5+ years in fintech and a Master’s in AI, leading the cross-border payments team at PuntoRed: people, architecture and delivery.',
   },
   nav: {
     expertise: 'Expertise',
     experience: 'Experience',
-    skills: 'Skills',
     education: 'Education',
+    skills: 'Skills',
   },
   ui: {
     skipLink: 'Skip to content',
@@ -39,17 +39,17 @@ export const en: Content = {
     },
   },
   sections: {
-    impact: 'Impact',
+    highlights: 'At a glance',
     expertise: 'What I bring to a team',
     experience: 'Experience',
     skills: 'Skills and tools',
     languages: 'Languages',
     education: 'Education and certifications',
-    educationHeading: 'Education',
+    degree: 'Degree',
     certifications: 'Certifications',
     contact: {
       title: 'Building a payments team? Let’s talk.',
-      lead: 'I’m open to Engineering Manager and Tech Lead conversations. Based in Bogotá, Colombia, working in Spanish and English.',
+      lead: 'I’m open to conversations about Tech Lead and engineering leadership roles. Based in Bogotá, Colombia, working in Spanish and English.',
       sendEmail: 'Send an email',
       copied: 'Email copied',
       copyFailed: 'Copy failed, use the email link',
@@ -62,27 +62,28 @@ export const en: Content = {
     action: 'Back to home',
   },
   profile: {
-    role: 'Engineering Manager & Tech Lead',
+    role: 'Software Tech Lead',
+    domain: 'Payments & Fintech',
     pitch:
-      'I lead engineering teams that build critical payment infrastructure: cross-border payments, pricing, routing and fraud prevention.',
+      'I lead the cross-border payments team at PuntoRed, pairing 5+ years in fintech with a Master’s in Artificial Intelligence.',
     languages: ['Spanish (native)', 'English (fluent)'],
   },
-  metrics: [
+  highlights: [
     {
-      value: '+20%',
-      description: 'transaction approval rate from routing, retry control and local payment methods',
+      value: '5+ years',
+      description: 'in fintech, building and running payment infrastructure in production',
     },
     {
-      value: '~$20K',
-      description: 'USD in monthly penalties avoided through the same payment flow improvements',
+      value: 'End-to-end',
+      description: 'ownership of a payments domain: architecture, roadmap, delivery and production support',
     },
     {
-      value: '5+ yrs',
-      description: 'building and running payment infrastructure in production',
+      value: 'AI-first',
+      description: 'team standards for AI-assisted coding, testing and code review with Claude Code',
     },
     {
-      value: '3',
-      description: 'promotions at PayU, from Junior to Specialist Software Engineer',
+      value: 'MSc in AI',
+      description: 'Master’s degree in Artificial Intelligence from Universidad Internacional de Valencia',
     },
   ],
   focusAreas: [
@@ -188,12 +189,16 @@ export const en: Content = {
     {
       title: 'Master’s Degree in Artificial Intelligence',
       issuer: 'Universidad Internacional de Valencia (VIU)',
-      detail: '2025 - 2026, remote',
+      period: '2025 - 2026',
+      location: 'Valencia, Spain',
+      description:
+        'The foundation behind the AI-first practices I bring to my team: AI-assisted coding, testing and code review.',
     },
     {
       title: 'Software Engineering',
       issuer: 'Escuela Colombiana de Ingeniería Julio Garavito',
-      detail: '2015 - 2020',
+      period: '2015 - 2020',
+      location: 'Bogotá, Colombia',
     },
   ],
   certifications: [
