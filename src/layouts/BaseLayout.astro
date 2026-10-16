@@ -1,0 +1,40 @@
+---
+/**
+ * Base page shell shared by every route: head metadata, global styles,
+ * skip link, header and footer. Page content goes in the default slot.
+ */
+import BaseHead from '../components/seo/BaseHead.astro';
+import SiteFooter from '../components/layout/SiteFooter.astro';
+import SiteHeader from '../components/layout/SiteHeader.astro';
+import { siteConfig } from '../config/site';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  noindex?: boolean;
+}
+
+const { title, description, noindex } = Astro.props;
+---
+
+<!doctype html>
+<html lang={siteConfig.locale}>
+  <head>
+    <BaseHead title={title} description={description} noindex={noindex} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <SiteHeader />
+    <main id="main">
+      <slot />
+    </main>
+    <SiteFooter />
+  </body>
+</html>
+
+<script>
+  import { initReveal } from '../scripts/reveal';
+
+  initReveal();
+</script>

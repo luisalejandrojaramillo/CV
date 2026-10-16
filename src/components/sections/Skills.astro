@@ -1,0 +1,86 @@
+---
+/**
+ * Skills grouped by discipline, laid out as a responsive grid of groups so
+ * a long keyword list stays scannable. Languages are listed separately.
+ */
+import { profile, skillGroups } from '../../data/profile';
+import Tag from '../ui/Tag.astro';
+---
+
+<section id="skills" class="section skills" aria-labelledby="skills-title">
+  <div class="container">
+    <h2 id="skills-title" class="section-title" data-reveal>Skills and tools</h2>
+
+    <div class="skills__grid">
+      {
+        skillGroups.map((group, index) => (
+          <div class="skill-group" data-reveal style={`--reveal-index: ${index % 3}`}>
+            <h3 class="skill-group__name">{group.name}</h3>
+            <ul role="list" class="skill-group__items">
+              {group.items.map((item) => (
+                <li>
+                  <Tag>{item}</Tag>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+      <div class="skill-group" data-reveal style="--reveal-index: 2">
+        <h3 class="skill-group__name">Languages</h3>
+        <ul role="list" class="skill-group__items">
+          {
+            profile.languages.map((language) => (
+              <li>
+                <Tag>{language}</Tag>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .skills {
+    background: var(--color-surface-muted);
+  }
+
+  .skills__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2.5rem clamp(1.5rem, 4vw, 3rem);
+    margin-top: clamp(2rem, 4vw, 3rem);
+  }
+
+  .skill-group {
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .skill-group__name {
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .skill-group__items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 899px) {
+    .skills__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 599px) {
+    .skills__grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>
