@@ -16,7 +16,7 @@ import { defaultLocale, locales } from './src/i18n/config.ts';
  * @see https://docs.astro.build/en/guides/internationalization/
  */
 export default defineConfig({
-  site: 'https://ljportfolio-lilac.vercel.app',
+  site: 'https://luisalejandroj.com',
   i18n: {
     locales: [...locales],
     defaultLocale,
