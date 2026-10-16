@@ -58,7 +58,7 @@ src/
 
 ## Updating content
 
-- **Text** (experience, skills, metrics, education, headings, buttons): edit the locale file for that language. Components read from it, so no markup changes are needed. See [Languages](#languages).
+- **Text** (experience, skills, highlights, education, headings, buttons): edit the locale file for that language. Components read from it, so no markup changes are needed. See [Languages](#languages).
 - **Name, email, social links**: edit `profile` in `src/data/profile.ts`. These are shared by every language.
 - **Resume**: replace `public/files/luis-alejandro-jaramillo-resume.pdf`, keeping the file name.
 - **Portrait**: replace `src/assets/images/portrait.jpg`. Astro generates responsive WebP versions on build.
