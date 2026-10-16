@@ -16,9 +16,9 @@ export const es: Content = {
     switchLabel: 'Ver este sitio en español',
   },
   meta: {
-    title: 'Luis Alejandro Jaramillo | Tech Lead, Pagos y Fintech',
+    title: 'Luis Alejandro Jaramillo | Líder de Ingeniería, Pagos y Fintech',
     description:
-      'Software Tech Lead con 5+ años en fintech y una Maestría en IA. Lidero el equipo de pagos transfronterizos en PuntoRed: personas, arquitectura y entrega.',
+      'Líder de ingeniería con 5+ años en fintech y una Maestría en IA. Lidero el equipo de pagos transfronterizos en PuntoRed: personas, arquitectura y entrega.',
   },
   nav: {
     expertise: 'Fortalezas',
@@ -53,7 +53,7 @@ export const es: Content = {
     certifications: 'Certificaciones',
     contact: {
       title: '¿Armando un equipo de pagos? Hablemos.',
-      lead: 'Estoy abierto a conversar sobre roles de Tech Lead y liderazgo de ingeniería. Vivo en Bogotá, Colombia, y trabajo en español e inglés.',
+      lead: 'Estoy abierto a conversar sobre roles de liderazgo de ingeniería. Vivo en Bogotá, Colombia, y trabajo en español e inglés.',
       sendEmail: 'Enviar un correo',
       copied: 'Correo copiado',
       copyFailed: 'No se pudo copiar el correo',
@@ -66,8 +66,8 @@ export const es: Content = {
     action: 'Volver al inicio',
   },
   profile: {
-    role: 'Software Tech Lead',
-    domain: 'Pagos y Fintech',
+    role: 'Líder de Ingeniería',
+    domain: 'Plataformas de Pagos y Fintech',
     pitch:
       'Lidero el equipo de pagos transfronterizos en PuntoRed, con 5+ años en fintech y una Maestría en Inteligencia Artificial.',
     languages: ['Español (nativo)', 'Inglés (fluido)'],

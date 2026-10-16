@@ -12,9 +12,9 @@ export const en: Content = {
     switchLabel: 'View this site in English',
   },
   meta: {
-    title: 'Luis Alejandro Jaramillo | Tech Lead, Payments & Fintech',
+    title: 'Luis Alejandro Jaramillo | Engineering Lead, Payments & Fintech',
     description:
-      'Software Tech Lead with 5+ years in fintech and a Master’s in AI, leading the cross-border payments team at PuntoRed: people, architecture and delivery.',
+      'Engineering Lead with 5+ years in fintech and a Master’s in AI, leading the cross-border payments team at PuntoRed: people, architecture and delivery.',
   },
   nav: {
     expertise: 'Expertise',
@@ -49,7 +49,7 @@ export const en: Content = {
     certifications: 'Certifications',
     contact: {
       title: 'Building a payments team? Let’s talk.',
-      lead: 'I’m open to conversations about Tech Lead and engineering leadership roles. Based in Bogotá, Colombia, working in Spanish and English.',
+      lead: 'I’m open to conversations about engineering leadership roles. Based in Bogotá, Colombia, working in Spanish and English.',
       sendEmail: 'Send an email',
       copied: 'Email copied',
       copyFailed: 'Copy failed, use the email link',
@@ -62,8 +62,8 @@ export const en: Content = {
     action: 'Back to home',
   },
   profile: {
-    role: 'Software Tech Lead',
-    domain: 'Payments & Fintech',
+    role: 'Engineering Lead',
+    domain: 'Payments & Fintech Platforms',
     pitch:
       'I lead the cross-border payments team at PuntoRed, pairing 5+ years in fintech with a Master’s in Artificial Intelligence.',
     languages: ['Spanish (native)', 'English (fluent)'],
