@@ -52,8 +52,8 @@ export const es: Content = {
     degree: 'Pregrado',
     certifications: 'Certificaciones',
     contact: {
-      title: '¿Armando un equipo de pagos? Hablemos.',
-      lead: 'Estoy abierto a conversar sobre roles de liderazgo de ingeniería. Vivo en Bogotá, Colombia, y trabajo en español e inglés.',
+      title: 'Conectemos.',
+      lead: 'Me gusta conversar sobre liderazgo de ingeniería, arquitectura de software y desarrollo AI-first. Vivo en Bogotá, Colombia, y trabajo en español e inglés.',
       sendEmail: 'Enviar un correo',
       copied: 'Correo copiado',
       copyFailed: 'No se pudo copiar el correo',

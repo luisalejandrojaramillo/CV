@@ -48,8 +48,8 @@ export const en: Content = {
     degree: 'Degree',
     certifications: 'Certifications',
     contact: {
-      title: 'Building a payments team? Let’s talk.',
-      lead: 'I’m open to conversations about engineering leadership roles. Based in Bogotá, Colombia, working in Spanish and English.',
+      title: 'Let’s connect.',
+      lead: 'I enjoy talking about engineering leadership, software architecture and AI-first development. Based in Bogotá, Colombia, working in Spanish and English.',
       sendEmail: 'Send an email',
       copied: 'Email copied',
       copyFailed: 'Copy failed, use the email link',
