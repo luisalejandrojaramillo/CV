@@ -1,0 +1,78 @@
+# Caddy configuration used by Railway (Railpack) to serve the static build.
+#
+# Railpack detects this file at the project root and uses it instead of its
+# default single-page-app template. Differences from that template:
+# - No fallback to /index.html: unknown URLs return a real 404 with the
+#   localized not-found page instead of the home page.
+# - Long-lived caching for fingerprinted assets in /_astro/.
+# - A few extra security headers.
+#
+# Railpack copies the build to /app, so the site root is /app/dist.
+# See https://railpack.com/languages/node and https://caddyserver.com/docs/caddyfile
+
+{
+	admin off
+	persist_config off
+	auto_https off
+
+	log {
+		format json
+	}
+
+	servers {
+		# Trust Railway's proxy so client IPs and schemes are reported correctly.
+		trusted_proxies static private_ranges 100.0.0.0/8
+	}
+}
+
+:{$PORT:80} {
+	log {
+		format json
+	}
+
+	respond /health 200
+
+	header {
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		# SAMEORIGIN still lets the site embed its own resume PDF.
+		X-Frame-Options "SAMEORIGIN"
+		Permissions-Policy "camera=(), microphone=(), geolocation=()"
+		-Server
+	}
+
+	# Fingerprinted build assets never change under the same URL.
+	@fingerprinted path /_astro/*
+	header @fingerprinted Cache-Control "public, max-age=31536000, immutable"
+
+	# Files in /public keep their names across releases (e.g. the resume PDF).
+	@public path /files/* /favicon.ico /favicon.svg /*.png /site.webmanifest /robots.txt
+	header @public Cache-Control "public, max-age=3600"
+
+	# HTML pages: always revalidate so new deploys show up immediately.
+	@pages not path /_astro/* /files/* /favicon.ico /favicon.svg /*.png /site.webmanifest /robots.txt
+	header @pages Cache-Control "public, max-age=0, must-revalidate"
+
+	root * /app/dist
+
+	encode zstd gzip
+
+	# Exact file, then clean URLs (/foo -> foo.html or foo/index.html).
+	try_files {path} {path}.html {path}/index.html
+
+	file_server {
+		hide .git .env*
+	}
+
+	# Serve the not-found page of the requested language with a 404 status.
+	handle_errors 404 {
+		handle /es/* {
+			rewrite * /es/404/index.html
+			file_server
+		}
+		handle {
+			rewrite * /404.html
+			file_server
+		}
+	}
+}

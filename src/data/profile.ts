@@ -109,10 +109,14 @@ export interface Content {
       toDark: string;
     };
     resume: {
-      /** Hero button label. */
+      /** Download button label. */
       download: string;
-      /** Footer link label. */
+      /** Footer link label and preview dialog title. */
       short: string;
+      /** Accessible label of the icon button that opens the preview. */
+      view: string;
+      /** Label of the button that closes the preview. */
+      close: string;
     };
   };
   /** Section headings and section-specific copy. */

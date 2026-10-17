@@ -1,0 +1,140 @@
+---
+/**
+ * Modal that previews the resume PDF in an iframe. Rendered once per page and
+ * opened by any `[data-resume-view]` link (see `ResumeActions`).
+ *
+ * The iframe source is only set when the dialog first opens, so the PDF is
+ * never downloaded unless the visitor asks for it.
+ */
+import DownloadIcon from '@phosphor-icons/core/regular/download-simple.svg';
+import XIcon from '@phosphor-icons/core/regular/x.svg';
+import { profile } from '../../data/profile';
+import { getContent } from '../../i18n';
+
+const { resume } = getContent(Astro.currentLocale).ui;
+---
+
+<dialog class="resume-dialog" aria-labelledby="resume-dialog-title" data-resume-dialog>
+  <div class="resume-dialog__header">
+    <h2 id="resume-dialog-title" class="resume-dialog__title">{resume.short}</h2>
+    <div class="resume-dialog__actions">
+      <a class="resume-dialog__button" href={profile.resumeHref} download>
+        <DownloadIcon aria-hidden="true" />
+        <span>{resume.download}</span>
+      </a>
+      <button class="resume-dialog__button resume-dialog__close" type="button" data-resume-close>
+        <XIcon aria-hidden="true" />
+        <span class="visually-hidden">{resume.close}</span>
+      </button>
+    </div>
+  </div>
+  <iframe class="resume-dialog__frame" title={resume.short} data-resume-frame data-src={`${profile.resumeHref}#navpanes=0&view=FitH`}
+  ></iframe>
+</dialog>
+
+<script>
+  import { initResumePreview } from '../../scripts/resume-preview';
+
+  initResumePreview();
+</script>
+
+<style>
+  .resume-dialog {
+    width: min(56rem, calc(100vw - 2 * var(--gutter)));
+    height: min(90dvh, 72rem);
+    max-width: none;
+    max-height: none;
+    /* The global reset removes the margin native dialogs use to center. */
+    margin: auto;
+    padding: 0;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-surface);
+    background: var(--color-surface);
+    color: var(--color-text);
+    box-shadow: var(--shadow-soft);
+    overflow: hidden;
+  }
+
+  .resume-dialog[open] {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .resume-dialog::backdrop {
+    background: rgb(13 17 16 / 0.55);
+    backdrop-filter: blur(4px);
+  }
+
+  .resume-dialog__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.75rem 0.75rem 0.75rem 1.25rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .resume-dialog__title {
+    font-size: 1rem;
+    letter-spacing: -0.01em;
+  }
+
+  .resume-dialog__actions {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .resume-dialog__button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 2.5rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-pill);
+    background: var(--color-surface);
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: border-color 0.2s ease;
+  }
+
+  .resume-dialog__button:hover {
+    border-color: var(--color-text-muted);
+  }
+
+  .resume-dialog__close {
+    justify-content: center;
+    width: 2.5rem;
+    padding: 0;
+  }
+
+  .resume-dialog__button :global(svg) {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .resume-dialog__frame {
+    flex: 1;
+    width: 100%;
+    border: 0;
+    background: var(--color-surface-muted);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .resume-dialog[open] {
+      animation: resume-dialog-enter 0.3s var(--ease-out);
+    }
+
+    @keyframes resume-dialog-enter {
+      from {
+        opacity: 0;
+        transform: translateY(0.75rem) scale(0.98);
+      }
+    }
+  }
+
+  /* Keep the page from scrolling behind the open dialog. */
+  :global(html:has(.resume-dialog[open])) {
+    overflow: hidden;
+  }
+</style>

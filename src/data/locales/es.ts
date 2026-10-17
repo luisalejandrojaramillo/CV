@@ -40,6 +40,8 @@ export const es: Content = {
     resume: {
       download: 'Descargar hoja de vida',
       short: 'Hoja de vida',
+      view: 'Ver hoja de vida',
+      close: 'Cerrar',
     },
   },
   sections: {

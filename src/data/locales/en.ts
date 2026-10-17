@@ -36,6 +36,8 @@ export const en: Content = {
     resume: {
       download: 'Download resume',
       short: 'Resume',
+      view: 'View resume',
+      close: 'Close',
     },
   },
   sections: {

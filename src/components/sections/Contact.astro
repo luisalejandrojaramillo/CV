@@ -1,7 +1,8 @@
 ---
 /**
  * Closing call to action. Email is the primary channel (with a copy button
- * for visitors without a mail client); LinkedIn and GitHub are secondary.
+ * for visitors without a mail client), followed by the resume; LinkedIn and
+ * GitHub are secondary.
  */
 import ArrowUpRightIcon from '@phosphor-icons/core/regular/arrow-up-right.svg';
 import CopyIcon from '@phosphor-icons/core/regular/copy.svg';
@@ -11,6 +12,7 @@ import LinkedinIcon from '@phosphor-icons/core/regular/linkedin-logo.svg';
 import { profile } from '../../data/profile';
 import { getContent } from '../../i18n';
 import Button from '../ui/Button.astro';
+import ResumeActions from '../ui/ResumeActions.astro';
 
 const { contact } = getContent(Astro.currentLocale).sections;
 ---
@@ -37,6 +39,7 @@ const { contact } = getContent(Astro.currentLocale).sections;
           <span data-copy-label>{profile.email}</span>
         </button>
         <span class="visually-hidden" role="status" aria-live="polite" data-copy-status></span>
+        <ResumeActions />
       </div>
 
       <ul role="list" class="contact__links">
@@ -163,6 +166,17 @@ const { contact } = getContent(Astro.currentLocale).sections;
     width: 0.875rem;
     height: 0.875rem;
     color: var(--color-text-muted);
+  }
+
+  /* Phone: every action takes a full row. */
+  @media (max-width: 599px) {
+    .contact__actions > :global(*) {
+      flex: 1 1 100%;
+    }
+
+    .contact__copy {
+      justify-content: center;
+    }
   }
 
   @media (max-width: 479px) {

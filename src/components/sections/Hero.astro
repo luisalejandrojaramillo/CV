@@ -1,15 +1,16 @@
 ---
 /**
- * Hero: who, what and the two primary actions, next to a portrait.
- * Asymmetric split on desktop, stacked (text first) on mobile.
+ * Hero: who, what and the primary actions, next to a portrait.
+ * Asymmetric split from tablet up; stacked (text first, full-width photo
+ * and buttons) on phones.
  */
 import { Image } from 'astro:assets';
 import ArrowRightIcon from '@phosphor-icons/core/regular/arrow-right.svg';
-import DownloadIcon from '@phosphor-icons/core/regular/download-simple.svg';
 import portrait from '../../assets/images/portrait.jpg';
 import { profile } from '../../data/profile';
 import { getContent } from '../../i18n';
 import Button from '../ui/Button.astro';
+import ResumeActions from '../ui/ResumeActions.astro';
 
 const content = getContent(Astro.currentLocale);
 ---
@@ -25,10 +26,7 @@ const content = getContent(Astro.currentLocale);
           {content.ui.getInTouch}
           <ArrowRightIcon slot="icon" aria-hidden="true" />
         </Button>
-        <Button href={profile.resumeHref} variant="secondary" download>
-          {content.ui.resume.download}
-          <DownloadIcon slot="icon" aria-hidden="true" />
-        </Button>
+        <ResumeActions />
       </div>
     </div>
 
@@ -37,7 +35,7 @@ const content = getContent(Astro.currentLocale);
         src={portrait}
         alt={content.ui.portraitAlt}
         widths={[400, 640, 960]}
-        sizes="(min-width: 900px) 40vw, 90vw"
+        sizes="(min-width: 900px) 26rem, (min-width: 600px) 36vw, calc(100vw - 2rem)"
         loading="eager"
         fetchpriority="high"
         class="hero__image"
@@ -121,19 +119,35 @@ const content = getContent(Astro.currentLocale);
     }
   }
 
+  /* Tablet: keep the split, with a smaller photo. */
   @media (max-width: 899px) {
+    .hero__grid {
+      gap: 2rem;
+    }
+
+    .hero__media {
+      max-width: 20rem;
+    }
+  }
+
+  /* Phone: one column, photo and buttons span the full content width. */
+  @media (max-width: 599px) {
     .hero__grid {
       grid-template-columns: minmax(0, 1fr);
     }
 
     .hero__media {
-      justify-self: start;
-      max-width: 22rem;
+      justify-self: stretch;
+      max-width: none;
     }
 
     .hero__image {
       aspect-ratio: 1;
       object-position: 50% 20%;
+    }
+
+    .hero__actions > :global(*) {
+      flex: 1 1 100%;
     }
   }
 </style>

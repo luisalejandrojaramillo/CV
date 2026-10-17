@@ -46,6 +46,7 @@ const { href, variant = 'primary', class: className, ...attrs } = Astro.props;
   }
 
   .button :global(svg) {
+    flex-shrink: 0;
     width: 1.05em;
     height: 1.05em;
     transition: transform 0.3s var(--ease-out);

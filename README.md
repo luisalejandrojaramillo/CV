@@ -93,3 +93,13 @@ The site uses [Astro i18n routing](https://docs.astro.build/en/guides/internatio
 ## Deployment
 
 `npm run build` outputs a static site in `dist/` that any static host can serve (Netlify, Vercel, Cloudflare Pages, GitHub Pages). `404.html` is generated for hosts that support custom error pages. On Netlify, `public/_redirects` also serves the Spanish not-found page for missing paths under `/es/`.
+
+### Railway
+
+Production runs on Railway, which builds the site with Railpack and serves `dist/` with Caddy. The root `Caddyfile` replaces Railpack's default single-page-app template so that:
+
+- unknown URLs return a real `404` with the not-found page of their language (`/es/*` gets the Spanish one) instead of the home page;
+- fingerprinted assets in `/_astro/` are cached for a year (`immutable`), files in `public/` for an hour and HTML pages always revalidate;
+- a few security headers are added.
+
+The domain is managed in Cloudflare (proxied, SSL/TLS mode **Full**), with a redirect rule from `www` to the apex domain.

@@ -1,0 +1,93 @@
+---
+/**
+ * Resume controls: a download button plus a small icon button to preview the
+ * PDF without downloading it.
+ *
+ * The preview link opens the PDF in a new tab by default. On large screens
+ * `resume-preview.ts` intercepts it and shows the PDF inside `ResumeDialog`
+ * instead. Phones keep the new-tab behaviour because mobile browsers cannot
+ * render a PDF inside a page.
+ */
+import DownloadIcon from '@phosphor-icons/core/regular/download-simple.svg';
+import EyeIcon from '@phosphor-icons/core/regular/eye.svg';
+import { profile } from '../../data/profile';
+import { getContent } from '../../i18n';
+import Button from './Button.astro';
+
+const { resume } = getContent(Astro.currentLocale).ui;
+---
+
+<div class="resume-actions">
+  <Button href={profile.resumeHref} variant="secondary" class="resume-actions__download" download>
+    {resume.download}
+    <DownloadIcon slot="icon" aria-hidden="true" />
+  </Button>
+  <a
+    class="resume-actions__view"
+    href={profile.resumeHref}
+    target="_blank"
+    rel="noopener"
+    aria-label={resume.view}
+    title={resume.view}
+    data-resume-view
+  >
+    <EyeIcon aria-hidden="true" />
+  </a>
+</div>
+
+<style>
+  .resume-actions {
+    display: inline-flex;
+    gap: 0.5rem;
+  }
+
+  .resume-actions__view {
+    display: grid;
+    flex-shrink: 0;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-pill);
+    background: var(--color-surface);
+    color: var(--color-text);
+    transition:
+      border-color 0.2s ease,
+      transform 0.2s var(--ease-out);
+  }
+
+  .resume-actions__view:hover {
+    border-color: var(--color-text-muted);
+  }
+
+  .resume-actions__view:active {
+    transform: scale(0.94);
+  }
+
+  .resume-actions__view :global(svg) {
+    width: 1.125rem;
+    height: 1.125rem;
+  }
+
+  /* On phones the group fills its row and the download button takes the space. */
+  @media (max-width: 599px) {
+    .resume-actions {
+      display: flex;
+      width: 100%;
+      container: resume-actions / inline-size;
+    }
+
+    .resume-actions :global(.resume-actions__download) {
+      flex: 1;
+      min-width: 0;
+    }
+  }
+
+  /* Very narrow rows (e.g. inside the contact panel on a 320px phone): drop the
+     download icon so the label always fits on one line. */
+  @container resume-actions (max-width: 17.5rem) {
+    .resume-actions :global(.resume-actions__download svg) {
+      display: none;
+    }
+  }
+</style>

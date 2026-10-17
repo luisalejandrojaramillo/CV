@@ -62,21 +62,43 @@ const { highlights, sections } = getContent(Astro.currentLocale);
     max-width: 24ch;
   }
 
+  /* Tablet: 2x2 grid separated by a gap and one horizontal rule. */
   @media (max-width: 899px) {
     .highlights__grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 2.5rem;
     }
 
-    .highlights__item {
-      padding: 1.75rem 1.25rem;
+    .highlights__item,
+    .highlights__item:first-child {
+      padding: 1.75rem 0;
     }
 
-    .highlights__item:nth-child(odd) {
-      padding-left: 0;
+    .highlights__item + .highlights__item {
       border-left: 0;
     }
 
     .highlights__item:nth-child(n + 3) {
+      border-top: 1px solid var(--color-border);
+    }
+
+    .highlights__description {
+      max-width: none;
+    }
+  }
+
+  /* Phone: a single column of facts. */
+  @media (max-width: 599px) {
+    .highlights__grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .highlights__item,
+    .highlights__item:first-child {
+      padding: 1.25rem 0;
+    }
+
+    .highlights__item:nth-child(n + 2) {
       border-top: 1px solid var(--color-border);
     }
   }
